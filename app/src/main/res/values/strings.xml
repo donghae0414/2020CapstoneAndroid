@@ -2,7 +2,7 @@
     <string name="app_name">newTattooAndroid</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_seemore">더보기</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="facebook_app_id">278691869800738</string>

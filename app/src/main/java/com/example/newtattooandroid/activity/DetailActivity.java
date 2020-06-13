@@ -20,7 +20,7 @@ import com.example.newtattooandroid.R;
 import com.example.newtattooandroid.adapter.SliderAdapter;
 import com.example.newtattooandroid.adapter.TattooReviewAdapter;
 import com.example.newtattooandroid.model.SliderItem;
-import com.example.newtattooandroid.model.TattoistDTO;
+import com.example.newtattooandroid.model.TattooistDto;
 import com.example.newtattooandroid.model.TattooReviewItem;
 import com.example.newtattooandroid.network.NetworkAPIs;
 import com.example.newtattooandroid.network.NetworkClient;
@@ -120,17 +120,17 @@ public class DetailActivity extends AppCompatActivity {
         tv_phone = findViewById(R.id.tv_tattooist_phone);
         tv_tattooist_name = findViewById(R.id.tv_tattooist_name);
 
-        Call<TattoistDTO> call = networkAPIs.getTattoist(tattooistId);
-        call.enqueue(new Callback<TattoistDTO>() {
+        Call<TattooistDto> call = networkAPIs.getTattoist(tattooistId);
+        call.enqueue(new Callback<TattooistDto>() {
             @Override
-            public void onResponse(Call<TattoistDTO> call, Response<TattoistDTO> response) {
+            public void onResponse(Call<TattooistDto> call, Response<TattooistDto> response) {
                 tv_phone.setText(response.body().getMobile()); // 전화번호
                 tv_tattooist_name.setText(response.body().getNickName()); // 닉네임
                 Log.e("TattooistSuccess", response.message());
             }
 
             @Override
-            public void onFailure(Call<TattoistDTO> call, Throwable t) {
+            public void onFailure(Call<TattooistDto> call, Throwable t) {
                 Log.e("TattooistError", t.getMessage());
             }
         });
