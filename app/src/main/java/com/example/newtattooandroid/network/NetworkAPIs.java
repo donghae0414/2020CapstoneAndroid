@@ -9,6 +9,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface NetworkAPIs {
@@ -34,4 +35,8 @@ public interface NetworkAPIs {
 
     @POST("/signup/tattooist")
     Call<TattooistDto> applyTattooist(@Body TattooistDto tattooistDto);
+
+    @Multipart
+    @POST("/write/post")
+    Call<MainItem> writePost(@Part("post") RequestBody post, @Part ArrayList<MultipartBody.Part> tattoos, @Part MultipartBody.Part design);
 }

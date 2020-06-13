@@ -93,7 +93,6 @@ public class SeemoreFragment extends Fragment {
             @Override
             public void onClick(View view) { // 게시물 액티비티
                 tattooistPostIntent = new Intent(getActivity().getApplicationContext(), TattooistPostsActivity.class);
-
                 tattooistPostIntent.putExtra("tattooistId", tattooistDto.getUserId());
                 tattooistPostIntent.putExtra("tattooistNickName", tattooistDto.getNickName());
                 tattooistPostIntent.putExtra("isTattooist", true);

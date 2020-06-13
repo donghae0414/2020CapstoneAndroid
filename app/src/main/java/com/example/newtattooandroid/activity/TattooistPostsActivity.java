@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,15 +62,16 @@ public class TattooistPostsActivity extends AppCompatActivity {
         networkAPIs = retrofit.create(NetworkAPIs.class);
 
         btn_tattooist_posts_back = findViewById(R.id.btn_tattooist_post_back);
-        btn_tattooist_posts_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_tattooist_posts_back.setOnClickListener((View view) -> {
                 finish();
-            }
         });
 
         btn_tattooist_write = findViewById(R.id.btn_tattooist_write);
         btn_tattooist_write.setOnClickListener((View view) -> { // 글 작성
+
+            Intent writePostIntent = new Intent(getApplicationContext(), WritePostActivity.class);
+            writePostIntent.putExtra("tattooistId", tattooistDto.getUserId());
+            getApplicationContext().startActivity(writePostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         });
 

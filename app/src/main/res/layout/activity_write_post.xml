@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.WritePostActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btn_write_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icons8_chevron_left_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시글 작성"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/btn_write_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제목" />
+
+        <EditText
+            android:id="@+id/et_write_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="제목을 입력해주세요"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내용" />
+
+        <EditText
+            android:id="@+id/et_write_description"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:gravity="start|top"
+            android:ems="10"
+            android:hint="게시글 내용을 적어주세요"
+            android:inputType="textMultiLine|text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가격" />
+
+        <EditText
+            android:id="@+id/et_write_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="5"
+            android:inputType="number" />
+        <TextView
+            android:text="만원"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장르" />
+
+        <EditText
+            android:id="@+id/et_write_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="장르를 입력해주세요(ex. 블랙워크)"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="대분류" />
+
+        <EditText
+            android:id="@+id/et_write_big_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="ex) 꽃, 무기, 패턴, 동물"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소분류" />
+
+        <EditText
+            android:id="@+id/et_write_small_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="ex) 장미, 칼, 패턴, 호랑이"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="타투 이미지 첨부"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_write_images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ImageButton
+            android:id="@+id/btn_write_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/round_add_black_18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="도안 이미지 첨부"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_write_design_name"
+            android:text="filename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/btn_write_design"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/round_add_black_18dp" />
+
+    </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/btn_write_post"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_done_black_18dp" />
+</LinearLayout>
