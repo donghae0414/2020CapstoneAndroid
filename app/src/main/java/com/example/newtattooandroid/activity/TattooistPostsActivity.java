@@ -38,6 +38,7 @@ public class TattooistPostsActivity extends AppCompatActivity {
 
     // ui components
     private ImageButton btn_tattooist_posts_back;
+    private ImageButton btn_tattooist_write;
     private TextView tv_tattooist_post_name;
 
     // only id, nickName
@@ -59,12 +60,17 @@ public class TattooistPostsActivity extends AppCompatActivity {
         retrofit = NetworkClient.getRetrofitClient(getApplicationContext());
         networkAPIs = retrofit.create(NetworkAPIs.class);
 
-        btn_tattooist_posts_back = findViewById(R.id.btn_tattooist_posts_back);
+        btn_tattooist_posts_back = findViewById(R.id.btn_tattooist_post_back);
         btn_tattooist_posts_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
+        });
+
+        btn_tattooist_write = findViewById(R.id.btn_tattooist_write);
+        btn_tattooist_write.setOnClickListener((View view) -> { // 글 작성
+
         });
 
         tv_tattooist_post_name = findViewById(R.id.tv_tattooist_post_name);
@@ -89,7 +95,6 @@ public class TattooistPostsActivity extends AppCompatActivity {
             public void onResponse(Call<List<MainItem>> call, Response<List<MainItem>> response) {
 //                Log.e("SuccessCall", response.body().toString());
                 posts = (ArrayList<MainItem>) response.body();
-
                 postAdapter.setItems(posts);
                 postsRecyclerView.getAdapter().notifyDataSetChanged();
             }
@@ -102,10 +107,15 @@ public class TattooistPostsActivity extends AppCompatActivity {
     }
 
     private void getTattooist(){
-        tattooistDto = new TattooistDto();
-        tattooistDto.setUserId(getIntent().getStringExtra("tattooistId"));
-        tattooistDto.setNickName(getIntent().getStringExtra("tattooistNickName"));
+        this.tattooistDto = new TattooistDto();
+        this.tattooistDto.setUserId(getIntent().getStringExtra("tattooistId"));
+        this.tattooistDto.setNickName(getIntent().getStringExtra("tattooistNickName"));
         this.isTattooist = getIntent().getBooleanExtra("isTattooist", true);
+
         tv_tattooist_post_name.setText(tattooistDto.getNickName());
+        if (this.isTattooist)
+            btn_tattooist_write.setVisibility(View.VISIBLE);
+        else
+            btn_tattooist_write.setVisibility(View.GONE);
     }
 }

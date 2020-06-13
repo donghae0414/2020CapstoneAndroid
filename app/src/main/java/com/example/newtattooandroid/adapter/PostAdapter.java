@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,10 +22,12 @@ import java.util.ArrayList;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private Context context;
     private ArrayList<MainItem> posts;
+    private Intent detailIntent;
 
     public PostAdapter(ArrayList<MainItem> posts, Context context) {
         this.posts = posts;
         this.context = context;
+        detailIntent = new Intent(context, DetailActivity.class);
     }
 
     public void setItems(ArrayList<MainItem> posts) {
@@ -35,10 +38,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     // 뷰 바인딩 부분을 한번만 하도록, ViewHolder 패턴 의무화
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_tattooist_post;
-
+        LinearLayout ly_tattooist_post;
         public ViewHolder(View view) {
             super(view);
             iv_tattooist_post = (ImageView) view.findViewById(R.id.iv_tattooist_post);
+            ly_tattooist_post = (LinearLayout) view.findViewById(R.id.ly_tattooist_post);
         }
     }
 
@@ -60,6 +64,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     .into(holder.iv_tattooist_post);
         }
 
+        holder.ly_tattooist_post.setOnClickListener((View view) -> {
+            detailIntent.putExtra("urls", posts.get(position).getTattooUrl());
+            detailIntent.putExtra("bigShape", posts.get(position).getBigShape());
+            detailIntent.putExtra("postId", posts.get(position).getPostId());
+            detailIntent.putExtra("tattooistId", posts.get(position).getTattooistId());
+            detailIntent.putExtra("description", posts.get(position).getDescription());
+            detailIntent.putExtra("avgCleanScore", posts.get(position).getAvgCleanScore());
+            context.startActivity(detailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        });
     }
 
     // Item 개수를 반환하는 부분

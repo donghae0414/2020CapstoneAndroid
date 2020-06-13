@@ -46,6 +46,8 @@ public class TattooReviewAdapter extends RecyclerView.Adapter<TattooReviewAdapte
         holder.userReviewDate.setText(appReviewsList.get(position).getDate());
         holder.userReviewRating.setRating((float)appReviewsList.get(position).getCleanScore());
 
+
+
     }
 
     @Override

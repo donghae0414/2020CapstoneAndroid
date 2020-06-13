@@ -31,4 +31,7 @@ public interface NetworkAPIs {
 
     @GET("/tattooist")
     Call<TattooistDto> getTattoist(@Query("userId") String userId);
+
+    @POST("/signup/tattooist")
+    Call<TattooistDto> applyTattooist(@Body TattooistDto tattooistDto);
 }

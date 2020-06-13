@@ -30,6 +30,17 @@
             app:layout_constraintStart_toStartOf="@+id/btn_apply_back"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/btn_tattooist_apply"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_done_black_18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -123,9 +134,10 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
+            android:gravity="start|top"
             android:ems="10"
             android:hint="ex) 자기소개를 적어주세요"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine|text" />
     </LinearLayout>
 
 </LinearLayout>

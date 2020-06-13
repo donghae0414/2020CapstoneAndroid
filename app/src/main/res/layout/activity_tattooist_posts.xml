@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/btn_tattooist_posts_back"
+            android:id="@+id/btn_tattooist_post_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="8dp"
@@ -29,8 +29,19 @@
             android:text="타투이스트 "
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/btn_tattooist_posts_back"
+            app:layout_constraintStart_toStartOf="@+id/btn_tattooist_post_back"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_tattooist_write"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/round_add_black_18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

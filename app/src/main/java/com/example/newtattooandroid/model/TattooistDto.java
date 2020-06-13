@@ -1,5 +1,7 @@
 package com.example.newtattooandroid.model;
 
+import java.util.HashMap;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -22,6 +24,15 @@ public class TattooistDto {
 
     public TattooistDto(){
 
+    }
+
+    public TattooistDto(HashMap<String, Object> parameters) {
+        this.userId = (String) parameters.get("userId");
+        this.nickName = (String) parameters.get("nickName");
+        this.bigAddress = (String) parameters.get("bigAddress");
+        this.smallAddress = (String) parameters.get("smallAddress");
+        this.mobile= (String) parameters.get("mobile");
+        this.description = (String) parameters.get("description");
     }
 
     @Override

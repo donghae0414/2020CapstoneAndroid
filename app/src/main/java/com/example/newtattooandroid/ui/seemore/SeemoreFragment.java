@@ -62,7 +62,6 @@ public class SeemoreFragment extends Fragment {
         getUser();
         getTattooist();
 
-
         // user menu
         tv_seemore_user_name = root.findViewById(R.id.tv_seemore_user_name);
         tv_seemore_user_name.setText(userDto.getName() + " (" + userDto.getNickName() + ")");
