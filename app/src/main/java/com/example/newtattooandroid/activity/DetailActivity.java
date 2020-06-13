@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -51,8 +52,10 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tv_tattoo_users_label;
 
     //타투이스트
+    private TattooistDto tattooistDto;
     private TextView tv_phone;
     private TextView tv_tattooist_name;
+    private RelativeLayout ly_detail_tattooist;
 
     //Todo : 닉네임 필요함
 
@@ -69,14 +72,14 @@ public class DetailActivity extends AppCompatActivity {
         retrofit = NetworkClient.getRetrofitClient(this);
         networkAPIs = retrofit.create(NetworkAPIs.class);
 
-        //툴바 레이아웃
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle("");
+//        //툴바 레이아웃
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+//        collapsingToolbarLayout.setTitle("");
 
         //도안 실행
         Button simulBtn = findViewById(R.id.btn_simulation);
@@ -124,8 +127,9 @@ public class DetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<TattooistDto>() {
             @Override
             public void onResponse(Call<TattooistDto> call, Response<TattooistDto> response) {
-                tv_phone.setText(response.body().getMobile()); // 전화번호
-                tv_tattooist_name.setText(response.body().getNickName()); // 닉네임
+                tattooistDto = (TattooistDto) response.body();
+                tv_phone.setText(tattooistDto.getMobile()); // 전화번호
+                tv_tattooist_name.setText(tattooistDto.getNickName()); // 닉네임
                 Log.e("TattooistSuccess", response.message());
             }
 
@@ -134,6 +138,17 @@ public class DetailActivity extends AppCompatActivity {
                 Log.e("TattooistError", t.getMessage());
             }
         });
+
+        ly_detail_tattooist = findViewById(R.id.ly_detail_tattooist);
+        ly_detail_tattooist.setOnClickListener((View view) -> {
+            Intent tattooistPostIntent = new Intent(getApplicationContext(), TattooistPostsActivity.class);
+
+            tattooistPostIntent.putExtra("tattooistId", tattooistDto.getUserId());
+            tattooistPostIntent.putExtra("tattooistNickName", tattooistDto.getNickName());
+            tattooistPostIntent.putExtra("isTattooist", false);
+            getApplicationContext().startActivity(tattooistPostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        });
+
 
         //리뷰 데이터 리사이클러 뷰
         tattooReviewsRecyclerView = findViewById(R.id.rv_tattoo_reviews);

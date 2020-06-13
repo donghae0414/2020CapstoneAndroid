@@ -29,6 +29,7 @@
               android:background="@color/white"/>
 
     <RelativeLayout
+            android:id="@+id/ly_detail_tattooist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">

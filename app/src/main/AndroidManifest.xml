@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ApplyTattooistActivity"></activity>
+        <activity android:name=".activity.TattooistPostsActivity"></activity>
+        <activity android:name=".activity.ApplyTattooistActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

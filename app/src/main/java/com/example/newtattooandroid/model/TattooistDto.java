@@ -20,6 +20,10 @@ public class TattooistDto {
     private String mobile;
     private String description;
 
+    public TattooistDto(){
+
+    }
+
     @Override
     public String toString() {
         return "TattooistDto{" +

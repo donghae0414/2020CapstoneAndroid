@@ -23,6 +23,9 @@ public interface NetworkAPIs {
     @GET("/allpost")
     Call<List<MainItem>> getAllPost();
 
+    @GET("/tattooistposts")
+    Call<List<MainItem>> getTattooistPost(@Query("tattooistId") String tattooistId);
+
     @GET("/review")
     Call<List<TattooReviewItem>> getAllReviews(@Query("postId") int id);
 

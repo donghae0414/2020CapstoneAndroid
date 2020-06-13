@@ -4,6 +4,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.newtattooandroid.R;
@@ -14,6 +17,7 @@ public class ApplyTattooistActivity extends AppCompatActivity {
     private UserDto userDto;
 
     private TextView tv_apply_user_name;
+    private ImageButton btn_apply_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,15 @@ public class ApplyTattooistActivity extends AppCompatActivity {
         getUserDto();
         tv_apply_user_name = findViewById(R.id.tv_apply_user_name);
         tv_apply_user_name.setText(userDto.getName() + " (" + userDto.getNickName() + ")");
+
+        btn_apply_back = findViewById(R.id.btn_apply_back);
+        btn_apply_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 닫기
+                finish();
+            }
+        });
     }
 
     private void getUserDto(){

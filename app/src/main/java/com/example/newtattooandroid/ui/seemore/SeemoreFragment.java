@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.newtattooandroid.R;
 import com.example.newtattooandroid.activity.ApplyTattooistActivity;
+import com.example.newtattooandroid.activity.TattooistPostsActivity;
 import com.example.newtattooandroid.model.TattooistDto;
 import com.example.newtattooandroid.model.UserDto;
 import com.example.newtattooandroid.network.NetworkAPIs;
@@ -38,6 +39,7 @@ public class SeemoreFragment extends Fragment {
 
     // intent
     private Intent applyUserIntent;
+    private Intent tattooistPostIntent;
 
     // ui component
     private TextView tv_seemore_user_name;
@@ -91,7 +93,12 @@ public class SeemoreFragment extends Fragment {
         tv_seemore_tattooist_posts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { // 게시물 액티비티
+                tattooistPostIntent = new Intent(getActivity().getApplicationContext(), TattooistPostsActivity.class);
 
+                tattooistPostIntent.putExtra("tattooistId", tattooistDto.getUserId());
+                tattooistPostIntent.putExtra("tattooistNickName", tattooistDto.getNickName());
+                tattooistPostIntent.putExtra("isTattooist", true);
+                getActivity().getApplicationContext().startActivity(tattooistPostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
 
@@ -117,7 +124,7 @@ public class SeemoreFragment extends Fragment {
             public void onResponse(Call<TattooistDto> call, Response<TattooistDto> response) { // exist tattooist
                 tattooistDto = (TattooistDto) response.body();
                 Log.e("SuccessCall", tattooistDto.toString());
-//                tv_seemore_apply_tattooist.setVisibility(View.GONE);
+                tv_seemore_apply_tattooist.setVisibility(View.GONE);
                 tv_seemore_tattooist_posts.setVisibility(View.VISIBLE);
             }
 
