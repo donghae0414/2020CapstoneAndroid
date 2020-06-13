@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -20,7 +21,7 @@ import com.example.newtattooandroid.R;
 import com.example.newtattooandroid.adapter.SliderAdapter;
 import com.example.newtattooandroid.adapter.TattooReviewAdapter;
 import com.example.newtattooandroid.model.SliderItem;
-import com.example.newtattooandroid.model.TattoistDTO;
+import com.example.newtattooandroid.model.TattooistDto;
 import com.example.newtattooandroid.model.TattooReviewItem;
 import com.example.newtattooandroid.network.NetworkAPIs;
 import com.example.newtattooandroid.network.NetworkClient;
@@ -51,8 +52,10 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tv_tattoo_users_label;
 
     //타투이스트
+    private TattooistDto tattooistDto;
     private TextView tv_phone;
     private TextView tv_tattooist_name;
+    private RelativeLayout ly_detail_tattooist;
 
     //Todo : 닉네임 필요함
 
@@ -69,14 +72,14 @@ public class DetailActivity extends AppCompatActivity {
         retrofit = NetworkClient.getRetrofitClient(this);
         networkAPIs = retrofit.create(NetworkAPIs.class);
 
-        //툴바 레이아웃
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle("");
+//        //툴바 레이아웃
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+//        collapsingToolbarLayout.setTitle("");
 
         //도안 실행
         Button simulBtn = findViewById(R.id.btn_simulation);
@@ -120,20 +123,32 @@ public class DetailActivity extends AppCompatActivity {
         tv_phone = findViewById(R.id.tv_tattooist_phone);
         tv_tattooist_name = findViewById(R.id.tv_tattooist_name);
 
-        Call<TattoistDTO> call = networkAPIs.getTattoist(tattooistId);
-        call.enqueue(new Callback<TattoistDTO>() {
+        Call<TattooistDto> call = networkAPIs.getTattoist(tattooistId);
+        call.enqueue(new Callback<TattooistDto>() {
             @Override
-            public void onResponse(Call<TattoistDTO> call, Response<TattoistDTO> response) {
-                tv_phone.setText(response.body().getMobile()); // 전화번호
-                tv_tattooist_name.setText(response.body().getNickName()); // 닉네임
+            public void onResponse(Call<TattooistDto> call, Response<TattooistDto> response) {
+                tattooistDto = (TattooistDto) response.body();
+                tv_phone.setText(tattooistDto.getMobile()); // 전화번호
+                tv_tattooist_name.setText(tattooistDto.getNickName()); // 닉네임
                 Log.e("TattooistSuccess", response.message());
             }
 
             @Override
-            public void onFailure(Call<TattoistDTO> call, Throwable t) {
+            public void onFailure(Call<TattooistDto> call, Throwable t) {
                 Log.e("TattooistError", t.getMessage());
             }
         });
+
+        ly_detail_tattooist = findViewById(R.id.ly_detail_tattooist);
+        ly_detail_tattooist.setOnClickListener((View view) -> {
+            Intent tattooistPostIntent = new Intent(getApplicationContext(), TattooistPostsActivity.class);
+
+            tattooistPostIntent.putExtra("tattooistId", tattooistDto.getUserId());
+            tattooistPostIntent.putExtra("tattooistNickName", tattooistDto.getNickName());
+            tattooistPostIntent.putExtra("isTattooist", false);
+            getApplicationContext().startActivity(tattooistPostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        });
+
 
         //리뷰 데이터 리사이클러 뷰
         tattooReviewsRecyclerView = findViewById(R.id.rv_tattoo_reviews);

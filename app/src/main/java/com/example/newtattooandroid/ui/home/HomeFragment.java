@@ -190,7 +190,7 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         call.enqueue(new Callback<List<MainItem>>() {
             @Override
             public void onResponse(Call<List<MainItem>> call, Response<List<MainItem>> response) {
-                Log.e("SuccessCall", response.body().toString());
+//                Log.e("SuccessCall", response.body().toString());
                 items = (ArrayList<MainItem>) response.body();
 
                 // TODO 정렬
