@@ -1,6 +1,7 @@
 package com.example.newtattooandroid.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,14 +47,15 @@ public class TattooReviewMoreAdapter extends RecyclerView.Adapter<TattooReviewMo
         holder.userReviewRating.setRating((float)appReviewsList.get(position).getCleanScore());
 
         //뷰페이저, 슬라이드 이미지
+
         String tattooUrl1 = appReviewsList.get(position).getTattooUrl1();
         String tattooUrl2 = appReviewsList.get(position).getTattooUrl2();
         String cleanUrl = appReviewsList.get(position).getCleanUrl();
 
         SliderAdapter sliderAdapter = new SliderAdapter(mContext);
-        if(tattooUrl1 != null) sliderAdapter.addItem(new SliderItem(tattooUrl1));
-        if(tattooUrl2 != null) sliderAdapter.addItem(new SliderItem(tattooUrl2));
-        if(cleanUrl != null) sliderAdapter.addItem(new SliderItem(cleanUrl));
+        if(!tattooUrl1.equals("null")) sliderAdapter.addItem(new SliderItem(tattooUrl1));
+        if(!tattooUrl2.equals("null")) sliderAdapter.addItem(new SliderItem(tattooUrl2));
+        if(!cleanUrl.equals("null")) sliderAdapter.addItem(new SliderItem(cleanUrl));
         holder.userReviewImages.setSliderAdapter(sliderAdapter);
     }
 
