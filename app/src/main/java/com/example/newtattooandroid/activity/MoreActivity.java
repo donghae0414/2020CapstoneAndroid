@@ -1,7 +1,11 @@
 package com.example.newtattooandroid.activity;
 
+import android.content.Intent;
 import android.util.Log;
 
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +30,11 @@ public class MoreActivity extends AppCompatActivity {
     private ArrayList<TattooReviewItem> appReviews;
     private TattooReviewMoreAdapter tmAdapter;
 
+    // ui components
+    private ImageButton btn_review_posts_back;
+    private ImageButton btn_review_write;
+    private TextView tv_review_title;
+
     //통신
     private Retrofit retrofit;
     private NetworkAPIs networkAPIs;
@@ -34,9 +43,27 @@ public class MoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more);
 
-        //툴바 설정, 뒤로가기 활성화, 타이틀
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("리뷰 더보기");
+        //기본 툴바 숨기기
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        //뒤로가기 버튼 - 클릭 시 종료 이벤트 처리
+        btn_review_posts_back = findViewById(R.id.btn_review_post_back);
+        btn_review_posts_back.setOnClickListener((View view) -> {
+            finish();
+        });
+
+        //리뷰 작성 버튼 - 클릭 시 리뷰 작성 form으로 이동
+        btn_review_write = findViewById(R.id.btn_review_write);
+        btn_review_write.setOnClickListener((View view) -> { // 글 작성
+            //Todo : review 작성 Activity로 넘어가야 됨. 내 아이디 받아와야됨.
+            Intent writePostIntent = new Intent(getApplicationContext(), WriteReviewActivity.class);
+//            writePostIntent.putExtra("tattooistId", tattooistDto.getUserId());
+            getApplicationContext().startActivity(writePostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        });
+
+
+
 
         //타투리뷰 더보기 리사이클러뷰 세팅
         tattooReviewMoreRecyclerView = findViewById(R.id.rv_reviews_more);
