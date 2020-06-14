@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,9 @@ public class SeemoreFragment extends Fragment {
     private TextView tv_seemore_apply_tattooist;
     private TextView tv_seemore_tattooist_posts;
 
+    private LinearLayout ly_seemore_apply_tattooist;
+    private LinearLayout ly_seemore_tattooist_posts;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         seemoreViewModel =
@@ -81,31 +85,49 @@ public class SeemoreFragment extends Fragment {
         });
 
         // tattooist menu
+        ly_seemore_apply_tattooist = root.findViewById(R.id.ly_seemore_apply_tattooist);
+        ly_seemore_apply_tattooist.setOnClickListener((View view)-> {
+            Log.e("apply_tattooist", userDto.toString());
+            applyUserIntent = new Intent(getActivity().getApplicationContext(), ApplyTattooistActivity.class);
+
+            applyUserIntent.putExtra("userId", userDto.getUserId());
+            applyUserIntent.putExtra("name", userDto.getName());
+            applyUserIntent.putExtra("nickName", userDto.getNickName());
+            getActivity().getApplicationContext().startActivity(applyUserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        });
         tv_seemore_apply_tattooist = root.findViewById(R.id.tv_seemore_apply_tattooist);
-        tv_seemore_apply_tattooist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { // 타투이스트 등록
-                Log.e("apply_tattooist", userDto.toString());
-                applyUserIntent = new Intent(getActivity().getApplicationContext(), ApplyTattooistActivity.class);
+//        tv_seemore_apply_tattooist.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) { // 타투이스트 등록
+//                Log.e("apply_tattooist", userDto.toString());
+//                applyUserIntent = new Intent(getActivity().getApplicationContext(), ApplyTattooistActivity.class);
+//
+//                applyUserIntent.putExtra("userId", userDto.getUserId());
+//                applyUserIntent.putExtra("name", userDto.getName());
+//                applyUserIntent.putExtra("nickName", userDto.getNickName());
+//                getActivity().getApplicationContext().startActivity(applyUserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//            }
+//        });
 
-                applyUserIntent.putExtra("userId", userDto.getUserId());
-                applyUserIntent.putExtra("name", userDto.getName());
-                applyUserIntent.putExtra("nickName", userDto.getNickName());
-                getActivity().getApplicationContext().startActivity(applyUserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            }
+        ly_seemore_tattooist_posts = root.findViewById(R.id.ly_seemore_tattooist_posts);
+        ly_seemore_tattooist_posts.setOnClickListener((View view) -> {
+            tattooistPostIntent = new Intent(getActivity().getApplicationContext(), TattooistPostsActivity.class);
+            tattooistPostIntent.putExtra("tattooistId", tattooistDto.getUserId());
+            tattooistPostIntent.putExtra("tattooistNickName", tattooistDto.getNickName());
+            tattooistPostIntent.putExtra("isTattooist", true);
+            getActivity().getApplicationContext().startActivity(tattooistPostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         });
-
         tv_seemore_tattooist_posts = root.findViewById(R.id.tv_seemore_tattooist_posts);
-        tv_seemore_tattooist_posts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { // 게시물 액티비티
-                tattooistPostIntent = new Intent(getActivity().getApplicationContext(), TattooistPostsActivity.class);
-                tattooistPostIntent.putExtra("tattooistId", tattooistDto.getUserId());
-                tattooistPostIntent.putExtra("tattooistNickName", tattooistDto.getNickName());
-                tattooistPostIntent.putExtra("isTattooist", true);
-                getActivity().getApplicationContext().startActivity(tattooistPostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            }
-        });
+//        tv_seemore_tattooist_posts.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) { // 게시물 액티비티
+//                tattooistPostIntent = new Intent(getActivity().getApplicationContext(), TattooistPostsActivity.class);
+//                tattooistPostIntent.putExtra("tattooistId", tattooistDto.getUserId());
+//                tattooistPostIntent.putExtra("tattooistNickName", tattooistDto.getNickName());
+//                tattooistPostIntent.putExtra("isTattooist", true);
+//                getActivity().getApplicationContext().startActivity(tattooistPostIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//            }
+//        });
 
         return root;
     }
@@ -129,16 +151,22 @@ public class SeemoreFragment extends Fragment {
             public void onResponse(Call<TattooistDto> call, Response<TattooistDto> response) { // exist tattooist
                 tattooistDto = (TattooistDto) response.body();
                 Log.e("SuccessCall", tattooistDto.toString());
-                tv_seemore_apply_tattooist.setVisibility(View.GONE);
-                tv_seemore_tattooist_posts.setVisibility(View.VISIBLE);
+
+                ly_seemore_apply_tattooist.setVisibility(View.GONE);
+                ly_seemore_tattooist_posts.setVisibility(View.VISIBLE);
+//                tv_seemore_apply_tattooist.setVisibility(View.GONE);
+//                tv_seemore_tattooist_posts.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<TattooistDto> call, Throwable t) { // network error OR No tattooist
                 Log.e("NetworkError", t.getMessage());
                 tattooistDto = null;
-                tv_seemore_apply_tattooist.setVisibility(View.VISIBLE);
-                tv_seemore_tattooist_posts.setVisibility(View.GONE);
+
+                ly_seemore_apply_tattooist.setVisibility(View.VISIBLE);
+                ly_seemore_tattooist_posts.setVisibility(View.GONE);
+//                tv_seemore_apply_tattooist.setVisibility(View.VISIBLE);
+//                tv_seemore_tattooist_posts.setVisibility(View.GONE);
             }
         });
     }
