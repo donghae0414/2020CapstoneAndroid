@@ -12,9 +12,9 @@ import com.example.newtattooandroid.model.Vector2D;
 
 public class SandboxView extends ImageView implements View.OnTouchListener {
 
-    private final Bitmap bitmap;
-    private final int width;
-    private final int height;
+    private Bitmap bitmap;
+    private int width;
+    private int height;
     private Camera camera;
     private Matrix transform = new Matrix();
 
@@ -60,6 +60,14 @@ public class SandboxView extends ImageView implements View.OnTouchListener {
         camera = new Camera();
 
         setOnTouchListener(this);
+    }
+
+    @Override
+    public void setImageBitmap(Bitmap bm) {
+        this.bitmap = bm;
+        this.width = bitmap.getWidth();
+        this.height = bitmap.getHeight();
+        invalidate();
     }
 
     public void setAngle(float angle) {
