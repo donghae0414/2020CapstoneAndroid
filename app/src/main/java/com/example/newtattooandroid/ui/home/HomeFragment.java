@@ -217,11 +217,11 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
 
     // 이미지 서치
     private void imageSearch(Bitmap originalBitmap) throws IOException {
-        Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, 256, 256, true);
+//        Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, 256, 256, true);
         File file = new File(getActivity().getApplicationContext().getCacheDir(), "temp");
         file.createNewFile();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        resizedBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+        originalBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
         byte[] bitmapData = bos.toByteArray();
 
         FileOutputStream fos = null;
