@@ -54,7 +54,7 @@ public class TattooReviewMoreAdapter extends RecyclerView.Adapter<TattooReviewMo
         if(tattooUrl1 != null) sliderAdapter.addItem(new SliderItem(tattooUrl1));
         if(tattooUrl2 != null) sliderAdapter.addItem(new SliderItem(tattooUrl2));
         if(cleanUrl != null) sliderAdapter.addItem(new SliderItem(cleanUrl));
-
+        holder.userReviewImages.setSliderAdapter(sliderAdapter);
     }
 
     @Override

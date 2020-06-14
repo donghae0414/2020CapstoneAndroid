@@ -91,6 +91,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             detailIntent.putExtra("tattooistId", items.get(position).getTattooistId());
             detailIntent.putExtra("description", items.get(position).getDescription());
             detailIntent.putExtra("avgCleanScore", items.get(position).getAvgCleanScore());
+            detailIntent.putExtra("designUrl", items.get(position).getDesignUrl());
             context.startActivity(detailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         });
 
