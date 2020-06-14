@@ -133,7 +133,11 @@ public class SimulationActivity extends AppCompatActivity {
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
 
-                    bgimageView.setImageBitmap(img);
+                    Glide.with(getApplicationContext())
+                            .load(img)
+                            .fitCenter()
+                            .into(bgimageView);
+//                    bgimageView.setImageBitmap(img);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

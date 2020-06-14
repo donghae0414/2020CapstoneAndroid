@@ -23,8 +23,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:src="@drawable/hand"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:id="@+id/iv_bg"
             ></ImageView>
 
