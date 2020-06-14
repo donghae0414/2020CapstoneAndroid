@@ -50,12 +50,14 @@ public class WriteReviewActivity extends AppCompatActivity {
 
         //타투 리뷰 이미지 버튼 - 사진 첨부
         tv_write_images = findViewById(R.id.tv_write_images);
+        tv_write_images.setVisibility(View.GONE);
         btn_write_image = findViewById(R.id.btn_write_image);
         btn_write_image.setOnClickListener((View view) -> {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(intent, 1);
+            tv_write_images.setVisibility(View.VISIBLE);
         });
 
         //타투 시술 장소 이미지 버튼 - 사진 첨부
