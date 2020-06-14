@@ -75,11 +75,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<MainItem> getLikePosts(){
+    public ArrayList<MainItem> getLikePosts() {
         return likePosts;
     }
 
-    public void addLikePosts(MainItem mainItem){
+    public void addLikePosts(MainItem mainItem) {
+        for(MainItem m : likePosts){
+            if(m.getPostId() == mainItem.getPostId())
+                return;
+        }
         likePosts.add(mainItem);
     }
 

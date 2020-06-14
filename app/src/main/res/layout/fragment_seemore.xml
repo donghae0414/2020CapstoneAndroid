@@ -8,12 +8,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/textview_underline"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_user_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_gravity="top"
+            android:layout_marginLeft="15dp"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_person_grey"
             app:civ_border_color="#FFFFFF"
@@ -26,31 +33,48 @@
 
             <TextView
                 android:id="@+id/tv_seemore_user_name"
-                android:layout_width="wrap_content"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
-                android:text="text" />
+                android:paddingLeft="15dp"
+                android:text="text"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+
             <TextView
                 android:id="@+id/tv_seemore_user_email"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:text="text"
+                android:textSize="16dp"
+                android:textStyle="normal"
+                />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="text" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_seemore_modify_userinfo"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/radius_blue_btn"
                     android:text="계정설정"
+                    android:textColor="#5588ff"
                     android:textSize="14dp" />
 
                 <Button
                     android:id="@+id/btn_seemore_logout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/radius_grey_btn"
                     android:text="로그아웃"
+                    android:textColor="#aaaaaa"
                     android:textSize="14dp" />
 
             </LinearLayout>
