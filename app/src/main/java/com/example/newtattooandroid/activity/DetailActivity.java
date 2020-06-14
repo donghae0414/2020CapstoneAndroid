@@ -50,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tv_clean_rating;
     private RatingBar rb_app;
     private TextView tv_tattoo_users_label;
+    private TextView more;
 
     //타투이스트
     private TattooistDto tattooistDto;
@@ -162,6 +163,18 @@ public class DetailActivity extends AppCompatActivity {
         //리뷰데이터 불러오기
         loadTattooReviewsData();
 
+
+        //리뷰더보기 클릭
+        more = findViewById(R.id.more);
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //리뷰 더보기 액티비티 실행, ArrayList<AppReviewItem> 넘겨줌
+                Intent intent = new Intent(getApplicationContext(), MoreActivity.class);
+                intent.putExtra("appReviews", appReviews);
+                getApplicationContext().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
     }
 
     private void loadTattooReviewsData() {

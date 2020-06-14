@@ -20,6 +20,7 @@
         <activity android:name=".activity.WritePostActivity"></activity>
         <activity android:name=".activity.TattooistPostsActivity" />
         <activity android:name=".activity.ApplyTattooistActivity" />
+        <activity android:name=".activity.MoreActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
