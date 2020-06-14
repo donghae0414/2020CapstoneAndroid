@@ -90,10 +90,16 @@ public class DetailActivity extends AppCompatActivity {
 
         //도안 실행
         Button simulBtn = findViewById(R.id.btn_simulation);
-
-        if (getIntent().hasExtra("designUrl")){ //타투 도안 없으면 실행 버튼 사라짐
+        designUrl = getIntent().getStringExtra("designUrl");
+//        if (getIntent().hasExtra("designUrl")){ //타투 도안 없으면 실행 버튼 사라짐
+//            simulBtn.setVisibility(View.GONE);
+//        }else{
+//            designUrl = getIntent().getStringExtra("designUrl");
+//        }
+        if (designUrl.equals(null) || designUrl.equals("null")){ //타투 도안 없으면 실행 버튼 사라짐
             simulBtn.setVisibility(View.GONE);
         }else{
+            simulBtn.setVisibility(View.VISIBLE);
             designUrl = getIntent().getStringExtra("designUrl");
         }
         simulBtn.setOnClickListener(new View.OnClickListener() {
