@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.newtattooandroid.MainActivity;
 import com.example.newtattooandroid.R;
 import com.example.newtattooandroid.adapter.ItemAdapter;
 import com.example.newtattooandroid.model.MainItem;
@@ -70,15 +71,15 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
     private Retrofit retrofit;
     private NetworkAPIs networkAPIs;
 
-
     private HomeViewModel homeViewModel;
+
+    private MainActivity mainActivity;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
 
         //retrofit
         retrofit = NetworkClient.getRetrofitClient(getContext());
@@ -104,6 +105,7 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         mRecyclerView = (RecyclerView) root.findViewById(R.id.rv_main_tattoo);
         mRecyclerView.setHasFixedSize(true);
 
+        mainActivity = (MainActivity) getActivity();
         //RecyclerView설정
         items = new ArrayList<>();
         // 이 부분에서 정렬 방식을 설정합니다.
@@ -111,7 +113,7 @@ public class HomeFragment extends Fragment implements MaterialSearchBar.OnSearch
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         requestManager = Glide.with(this);
-        mAdapter = new ItemAdapter(items, getContext(), requestManager);
+        mAdapter = new ItemAdapter(items, getContext(), requestManager, mainActivity);
         mRecyclerView.setAdapter(mAdapter);
 
         //모든 게시물 조회

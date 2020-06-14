@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.newtattooandroid.model.MainItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -17,7 +18,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+    private static ArrayList<MainItem> likePosts;
 
     //갤러리 권한
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mLayout = findViewById(R.id.activity_main);
+
+        likePosts = new ArrayList<>();
         /*
             basic nav config
         */
@@ -67,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public ArrayList<MainItem> getLikePosts(){
+        return likePosts;
+    }
+
+    public void addLikePosts(MainItem mainItem){
+        likePosts.add(mainItem);
     }
 
     @Override
