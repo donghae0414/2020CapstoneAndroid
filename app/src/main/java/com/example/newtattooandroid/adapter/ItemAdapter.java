@@ -104,6 +104,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         holder.btn_like.setOnClickListener((View view) -> {
             mainActivity.addLikePosts(items.get(position));
+            holder.btn_like.setImageResource(R.drawable.ic_like_filled);
             //TODO
             //button 색상 변경
         });

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">newTattooAndroid</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">검색</string>
+    <string name="title_dashboard">좋아요</string>
     <string name="title_seemore">더보기</string>
 
     <string name="title_activity_main">MainActivity</string>
