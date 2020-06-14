@@ -47,6 +47,8 @@ public class SeemoreFragment extends Fragment {
     private Button btn_seemore_modify_userinfo;
     private Button btn_seemore_logout;
 
+    private TextView tv_seemore_my_reviews;
+
     private TextView tv_seemore_apply_tattooist;
     private TextView tv_seemore_tattooist_posts;
 
@@ -72,6 +74,11 @@ public class SeemoreFragment extends Fragment {
         btn_seemore_modify_userinfo = root.findViewById(R.id.btn_seemore_modify_userinfo);
         btn_seemore_logout = root.findViewById(R.id.btn_seemore_logout);
 
+        tv_seemore_my_reviews = root.findViewById(R.id.tv_seemore_my_reviews);
+        tv_seemore_my_reviews.setOnClickListener((View view) -> { // 내가 작성한 리뷰 / 리뷰 더보기 참조
+
+
+        });
 
         // tattooist menu
         tv_seemore_apply_tattooist = root.findViewById(R.id.tv_seemore_apply_tattooist);

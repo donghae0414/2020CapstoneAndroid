@@ -30,6 +30,10 @@ public interface NetworkAPIs {
     @GET("/review")
     Call<List<TattooReviewItem>> getAllReviews(@Query("postId") int id);
 
+    // TODO
+    @GET("/user/review")
+    Call<List<TattooReviewItem>> getUserReviews(@Query("userId") String userId);
+
     @GET("/tattooist")
     Call<TattooistDto> getTattoist(@Query("userId") String userId);
 

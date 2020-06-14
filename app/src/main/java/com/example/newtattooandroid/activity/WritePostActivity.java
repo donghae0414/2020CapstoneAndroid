@@ -104,7 +104,6 @@ public class WritePostActivity extends AppCompatActivity {
             startActivityForResult(intent, 1);
         });
 
-
         tv_write_design_name = findViewById(R.id.tv_write_design_name);
         tv_write_design_name.setVisibility(View.GONE);
         btn_write_design = findViewById(R.id.btn_write_design);
