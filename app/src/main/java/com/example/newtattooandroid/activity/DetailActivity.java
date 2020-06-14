@@ -3,6 +3,7 @@ package com.example.newtattooandroid.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +59,8 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tv_tattooist_name;
     private RelativeLayout ly_detail_tattooist;
 
+    //인텐트
+    String designUrl = null;
     //Todo : 닉네임 필요함
 
     @SuppressLint("ResourceAsColor")
@@ -84,10 +87,17 @@ public class DetailActivity extends AppCompatActivity {
 
         //도안 실행
         Button simulBtn = findViewById(R.id.btn_simulation);
+
+        if (getIntent().hasExtra("designUrl")){ //타투 도안 없으면 실행 버튼 사라짐
+            simulBtn.setVisibility(View.GONE);
+        }else{
+            designUrl = getIntent().getStringExtra("designUrl");
+        }
         simulBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SimulationActivity.class);
+                intent.putExtra("designUrl", designUrl);
                 getApplicationContext().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });

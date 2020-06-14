@@ -6,12 +6,17 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.newtattooandroid.R;
 import com.example.newtattooandroid.gesture.SandboxView;
 
@@ -42,6 +47,16 @@ public class SimulationActivity extends AppCompatActivity {
         bgimageView = findViewById(R.id.iv_bg);
         saveLayout = findViewById(R.id.ll_save);
         captureLayout = findViewById(R.id.fl_capture);
+
+        //도안 이미지 불러오기
+        String designUrl = getIntent().getStringExtra("designUrl");
+        Log.e("designUrl", designUrl);
+        Glide.with(getApplicationContext()).asBitmap().load(designUrl).override(200, 200).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                sandboxView.setImageBitmap(resource);
+            }
+        });
 
         //저장하기 Layout, 불러오기 Layout 클릭 이벤트 처리
         loadLayout.setOnClickListener(new View.OnClickListener() {

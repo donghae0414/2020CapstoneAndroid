@@ -8,13 +8,16 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
 @Getter
 @Setter
 @EqualsAndHashCode
-public class TattooReviewItem {
+public class TattooReviewItem implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private int cleanScore;
     private String cleanUrl = null;
