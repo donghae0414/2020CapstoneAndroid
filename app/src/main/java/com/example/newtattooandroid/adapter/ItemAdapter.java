@@ -89,7 +89,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             detailIntent.putExtra("bigShape", items.get(position).getBigShape());
             detailIntent.putExtra("postId", items.get(position).getPostId());
             detailIntent.putExtra("tattooistId", items.get(position).getTattooistId());
+            detailIntent.putExtra("title", items.get(position).getTitle());
             detailIntent.putExtra("description", items.get(position).getDescription());
+            detailIntent.putExtra("price", items.get(position).getPrice());
             detailIntent.putExtra("avgCleanScore", items.get(position).getAvgCleanScore());
             detailIntent.putExtra("designUrl", items.get(position).getDesignUrl());
             context.startActivity(detailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

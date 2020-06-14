@@ -69,8 +69,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             detailIntent.putExtra("bigShape", posts.get(position).getBigShape());
             detailIntent.putExtra("postId", posts.get(position).getPostId());
             detailIntent.putExtra("tattooistId", posts.get(position).getTattooistId());
+            detailIntent.putExtra("title", posts.get(position).getTitle());
             detailIntent.putExtra("description", posts.get(position).getDescription());
+            detailIntent.putExtra("price", posts.get(position).getPrice());
             detailIntent.putExtra("avgCleanScore", posts.get(position).getAvgCleanScore());
+            detailIntent.putExtra("designUrl", posts.get(position).getDesignUrl());
             context.startActivity(detailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         });
     }

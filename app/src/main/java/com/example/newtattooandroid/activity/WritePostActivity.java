@@ -94,6 +94,7 @@ public class WritePostActivity extends AppCompatActivity {
         et_write_small_shape = findViewById(R.id.et_write_small_shape);
 
         tv_write_images = findViewById(R.id.tv_write_images);
+        tv_write_images.setVisibility(View.GONE);
         btn_write_image = findViewById(R.id.btn_write_image);
         tattoos = new ArrayList<>();
         design = null;
@@ -102,6 +103,7 @@ public class WritePostActivity extends AppCompatActivity {
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(intent, 1);
+            tv_write_images.setVisibility(View.VISIBLE);
         });
 
         tv_write_design_name = findViewById(R.id.tv_write_design_name);

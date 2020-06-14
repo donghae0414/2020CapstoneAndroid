@@ -47,16 +47,19 @@ public class DetailActivity extends AppCompatActivity {
     private NetworkAPIs networkAPIs;
 
     //상세 리뷰
+    private TextView tv_title;
     private TextView tv_description;
     private TextView tv_clean_rating;
     private RatingBar rb_app;
     private TextView tv_tattoo_users_label;
     private TextView more;
+    private TextView tv_price;
 
     //타투이스트
     private TattooistDto tattooistDto;
     private TextView tv_phone;
     private TextView tv_tattooist_name;
+    private TextView tv_tattooist_address;
     private RelativeLayout ly_detail_tattooist;
 
     //인텐트
@@ -118,6 +121,12 @@ public class DetailActivity extends AppCompatActivity {
         String descript = getIntent().getStringExtra("description");
         tv_description.setText(descript);
 
+        tv_title = findViewById(R.id.tv_title);
+        tv_title.setText(getIntent().getStringExtra("title"));
+
+        tv_price = findViewById(R.id.tv_price);
+        tv_price.setText(getIntent().getIntExtra("price", 0) + "만원");
+
         //글의 clean 점수
         float avgCleanScore = getIntent().getFloatExtra("avgCleanScore", 0);
         float roundScore = (float)(Math.round(avgCleanScore * 10) / 10.0);
@@ -133,6 +142,7 @@ public class DetailActivity extends AppCompatActivity {
 
         tv_phone = findViewById(R.id.tv_tattooist_phone);
         tv_tattooist_name = findViewById(R.id.tv_tattooist_name);
+        tv_tattooist_address = findViewById(R.id.tv_tattooist_address);
 
         Call<TattooistDto> call = networkAPIs.getTattoist(tattooistId);
         call.enqueue(new Callback<TattooistDto>() {
@@ -141,6 +151,7 @@ public class DetailActivity extends AppCompatActivity {
                 tattooistDto = (TattooistDto) response.body();
                 tv_phone.setText(tattooistDto.getMobile()); // 전화번호
                 tv_tattooist_name.setText(tattooistDto.getNickName()); // 닉네임
+                tv_tattooist_address.setText("(" + tattooistDto.getBigAddress() + " " + tattooistDto.getSmallAddress() + ")");
                 Log.e("TattooistSuccess", response.message());
             }
 
