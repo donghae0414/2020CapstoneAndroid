@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,32 +14,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.example.newtattooandroid.MainActivity;
 import com.example.newtattooandroid.R;
 import com.example.newtattooandroid.activity.DetailActivity;
 import com.example.newtattooandroid.model.MainItem;
 
 import java.util.ArrayList;
 
+public class LikeItemAdapter extends RecyclerView.Adapter<LikeItemAdapter.ViewHolder> {
 
-/**
- * Created by jungwoon on 2017. 1. 18..
- */
-
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private Context context;
     private ArrayList<MainItem> items;
     private int lastPosition = -1;
     private RequestManager requestManager;
     private Intent detailIntent;
-    private MainActivity mainActivity;
 
-    public ItemAdapter(ArrayList<MainItem> items, Context context, RequestManager requestManager, MainActivity mainActivity) {
+    public LikeItemAdapter(ArrayList<MainItem> items, Context context, RequestManager requestManager) {
         this.items = items;
         this.context = context;
         this.requestManager = requestManager;
         detailIntent = new Intent(context, DetailActivity.class);
-        this.mainActivity = mainActivity;
     }
 
     public void setItems(ArrayList<MainItem> items) {
@@ -52,30 +44,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textView;
-        ImageView cleanImageView;
-        ImageButton btn_like;
 
         public ViewHolder(View view) {
             super(view);
-            imageView = (ImageView) view.findViewById(R.id.image_view);
-            textView = (TextView) view.findViewById(R.id.text_view);
-            cleanImageView = (ImageView) view.findViewById(R.id.clean_image_view);
-            btn_like = (ImageButton) view.findViewById(R.id.btn_like);
+            imageView = (ImageView) view.findViewById(R.id.like_image_view);
+            textView = (TextView) view.findViewById(R.id.like_text_view);
         }
+
     }
 
     // 새로운 뷰 생성
     @Override
-    public ItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+    public LikeItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.like_cardview, parent, false);
+        LikeItemAdapter.ViewHolder viewHolder = new LikeItemAdapter.ViewHolder(view);
 
         return viewHolder;
     }
 
     // RecyclerView의 getView 부분을 담당하는 부분
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(LikeItemAdapter.ViewHolder holder, int position) {
         String url = items.get(position).getTattooUrl().get(0);
 
         if (url != null) {
@@ -95,18 +84,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         });
 
         holder.textView.setText(items.get(position).getTitle());
-
-        if (items.get(position).getAvgCleanScore() < 3.0) {
-            holder.cleanImageView.setVisibility(View.INVISIBLE);
-        } else {
-            holder.cleanImageView.setVisibility(View.VISIBLE);
-        }
-
-        holder.btn_like.setOnClickListener((View view) -> {
-            mainActivity.addLikePosts(items.get(position));
-            //TODO
-            //button 색상 변경
-        });
     }
 
     // Item 개수를 반환하는 부분
