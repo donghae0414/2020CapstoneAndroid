@@ -71,6 +71,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             detailIntent.putExtra("tattooistId", posts.get(position).getTattooistId());
             detailIntent.putExtra("description", posts.get(position).getDescription());
             detailIntent.putExtra("avgCleanScore", posts.get(position).getAvgCleanScore());
+            detailIntent.putExtra("designUrl", posts.get(position).getDesignUrl());
             context.startActivity(detailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         });
     }

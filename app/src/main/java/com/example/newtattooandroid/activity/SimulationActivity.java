@@ -50,13 +50,14 @@ public class SimulationActivity extends AppCompatActivity {
 
         //도안 이미지 불러오기
         String designUrl = getIntent().getStringExtra("designUrl");
-        Log.e("designUrl", designUrl);
-        Glide.with(getApplicationContext()).asBitmap().load(designUrl).override(200, 200).into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                sandboxView.setImageBitmap(resource);
-            }
-        });
+        if(!designUrl.equals("null")) {
+            Glide.with(getApplicationContext()).asBitmap().load(designUrl).override(200, 200).into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    sandboxView.setImageBitmap(resource);
+                }
+            });
+        }
 
         //저장하기 Layout, 불러오기 Layout 클릭 이벤트 처리
         loadLayout.setOnClickListener(new View.OnClickListener() {
